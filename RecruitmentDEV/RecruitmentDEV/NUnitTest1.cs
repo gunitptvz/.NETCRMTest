@@ -1,14 +1,28 @@
 ﻿using System;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace RecruitmentDEV
 {
-    //[TestFixture]
+    [TestFixture]
     public class NUnitTest1
     {
-        //[Test]
+        [SetUp]
+        public void OpenCRM()
+        {
+            IWebDriver crm = null;
+        }
+
+        [Test]
         public void TestMethod1()
         {
+
+        }
+
+        [TearDown]
+        public void CloseCRM()
+        {
+
         }
     }
 }
