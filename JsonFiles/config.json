@@ -1,7 +1,8 @@
-{
+[
+    {
     "url": "recruitment-test1.crmdevs.space/RecruitmentNightly/main.aspx#44538001",
     "login": "Administrator",
-    "password": "Index139240!",
+    "password": "Index139240!"
     //"reporthost": "mongodb://195.88.73.175:27017",
     //"veryshortwait": "1000",
     //"shortwait": "5000",
@@ -16,4 +17,5 @@
     //195.88.73.192/CDVRecruitmentDev/main.aspx#745119928,
     //Administrator
     //Index139240!
-}
+    }
+]
