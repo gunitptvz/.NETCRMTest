@@ -23,6 +23,7 @@ namespace RecruitmentDEV.Data
             RestRequest request = new RestRequest(datasource, Method.GET);
             IRestResponse<Data> response = client.Execute<Data>(request);
             string a = response.Content;
+            string b = response.Data.Url;
             return response.Data;
         }
     }

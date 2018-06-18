@@ -9,10 +9,10 @@ namespace RecruitmentDEV.Data
     /// <summary>
     /// Contains data properties
     /// </summary>
-    class Data
+    public class Data
     {
-        string Url { get; set; }
-        string Login { get; set; }
-        string Password { get; set; }
+        public string Url { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     }
 }

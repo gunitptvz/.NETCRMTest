@@ -2,12 +2,12 @@
     "url": "recruitment-test1.crmdevs.space/RecruitmentNightly/main.aspx#44538001",
     "login": "Administrator",
     "password": "Index139240!"
-    /*"reporthost": "mongodb://195.88.73.175:27017",
-    "veryshortwait": "1000",
-    "shortwait": "5000",
-    "middlewait": "10000",
-    "longwait": "20000",
-    "verylongwait": "480000"*/
+    //"reporthost": "mongodb://195.88.73.175:27017",
+    //"veryshortwait": "1000",
+    //"shortwait": "5000",
+    //"middlewait": "10000",
+    //"longwait": "20000",
+    //"verylongwait": "480000"
 
     //recruitment-test1.crmdevs.space/RecruitmentNightly/main.aspx#172094778,
     //Administrator
