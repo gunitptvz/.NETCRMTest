@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using RecruitmentDEV.Data;
 
 namespace RecruitmentDEV
 {
@@ -16,7 +17,8 @@ namespace RecruitmentDEV
         [Test]
         public void TestMethod1()
         {
-
+            MapJsonAPI data = new MapJsonAPI();
+            data.GetData("https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/config.json");
         }
 
         [TearDown]

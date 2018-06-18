@@ -19,9 +19,10 @@ namespace RecruitmentDEV.Data
         /// <returns></returns>
         public Data GetData(string datasource)
         {
-            RestClient client = new RestClient();
+            RestClient client = new RestClient(datasource);
             RestRequest request = new RestRequest(datasource, Method.GET);
             IRestResponse<Data> response = client.Execute<Data>(request);
+            string a = response.Content;
             return response.Data;
         }
     }
