@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
+using Newtonsoft.Json;
 
 namespace RecruitmentDEV.Data
 {
@@ -19,12 +20,14 @@ namespace RecruitmentDEV.Data
         /// <returns></returns>
         public Data GetData(string datasource)
         {
+            Data result = new Data();
+
             RestClient client = new RestClient(datasource);
             RestRequest request = new RestRequest(datasource, Method.GET);
-            IRestResponse<Data> response = client.Execute<Data>(request);
-            string a = response.Content;
-            string b = response.Data.Url;
-            return response.Data;
+            IRestResponse response = client.Execute(request);
+            result = JsonConvert.DeserializeObject<Data>(response.Content);
+
+            return result;
         }
     }
 }
