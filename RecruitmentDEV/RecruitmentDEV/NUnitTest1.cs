@@ -1,30 +1,49 @@
 ﻿using System;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using RecruitmentDEV.Data;
+using RecruitmentDEV.Pages;
+using System.Collections.Generic;
 
 namespace RecruitmentDEV
 {
     [TestFixture]
     public class NUnitTest1
     {
+        Queue<IWebDriver> queqe = new Queue<IWebDriver>();
+        HomePage homepage1 = null;
+        HomePage homepage2 = null;
+
         [SetUp]
         public void OpenCRM()
         {
-            IWebDriver crm = null;
+            queqe.Enqueue(new ChromeDriver());
         }
 
+        [Parallelizable(ParallelScope.Self)]
         [Test]
         public void TestMethod1()
         {
-            MapJsonAPI data = new MapJsonAPI();
-            data.GetData("https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/config.json");
+            homepage1 = new HomePage(queqe.Dequeue());
+            homepage1.OpenPage();
         }
 
-        [TearDown]
+        [Parallelizable(ParallelScope.Self)]
+        [Test]
+        public void TestMethod2()
+        {
+            homepage2 = new HomePage(queqe.Dequeue());
+            homepage2.OpenPage();
+        }
+
+        [OneTimeTearDown]
         public void CloseCRM()
         {
-
+            Thread.Sleep(5000);
+            homepage1.ClosePage();
+            homepage2.ClosePage();
         }
     }
 }
