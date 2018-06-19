@@ -59,10 +59,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Data.cs" />
+    <Compile Include="Data\DataModel.cs" />
     <Compile Include="Data\IData.cs" />
     <Compile Include="Data\MapJsonAPI.cs" />
     <Compile Include="NUnitTest1.cs" />
+    <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

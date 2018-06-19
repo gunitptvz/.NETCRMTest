@@ -9,7 +9,7 @@ namespace RecruitmentDEV.Data
     /// <summary>
     /// Contains data properties
     /// </summary>
-    public class Data
+    public class DataModel
     {
         public string Url { get; set; }
         public string Login { get; set; }

@@ -11,21 +11,21 @@ namespace RecruitmentDEV.Data
     /// <summary>
     /// Contains members and functions to get Json files using API
     /// </summary>
-    class MapJsonAPI : IData
+    public class MapJsonAPI : IData
     {
         /// <summary>
         /// Gets data from Json file
         /// </summary>
         /// <param name="datasource"></param>
         /// <returns></returns>
-        public Data GetData(string datasource)
+        public DataModel GetData(string datasource)
         {
-            Data result = new Data();
+            DataModel result = new DataModel();
 
             RestClient client = new RestClient(datasource);
             RestRequest request = new RestRequest(datasource, Method.GET);
             IRestResponse response = client.Execute(request);
-            result = JsonConvert.DeserializeObject<Data>(response.Content);
+            result = JsonConvert.DeserializeObject<DataModel>(response.Content);
 
             return result;
         }
