@@ -32,7 +32,7 @@ namespace RecruitmentDEV.Pages
         /// <summary>
         /// Opens dynamics crm homepage
         /// </summary>
-        public void OpenPage()
+        public IWebDriver OpenPage()
         {
             data = mapAPI.GetData(dataSource);
             driver.Manage().Window.Maximize();
@@ -40,6 +40,8 @@ namespace RecruitmentDEV.Pages
             driver.Url = "http://" + data.Login + ":" + data.Password + "@" + data.Url;
             driver.SwitchTo().Frame(inlineDialogFrame);
             closeHelloWindowButton.Click();
+
+            return driver;
         }
 
         /// <summary>
