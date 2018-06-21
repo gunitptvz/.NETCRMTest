@@ -15,5 +15,6 @@ namespace RecruitmentDEV.Data
         public string Login { get; set; }
         public string Password { get; set; }
         public double Seconds { get; set; }
+
     }
 }

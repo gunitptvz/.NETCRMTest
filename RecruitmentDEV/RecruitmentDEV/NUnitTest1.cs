@@ -12,39 +12,38 @@ namespace RecruitmentDEV
     [TestFixture]
     public class NUnitTest1
     {
-        //Queue<IWebDriver> queqe = new Queue<IWebDriver>();
-        //HomePage homepage1 = null;
-        //HomePage homepage2 = null;
+        Queue<IWebDriver> queqe = new Queue<IWebDriver>();
 
         [SetUp]
         public void OpenCRM()
         {
-            //queqe.Enqueue(new ChromeDriver());
+            queqe.Enqueue(new ChromeDriver());
         }
 
         [Parallelizable]
         [Test]
         public void TestMethod1()
         {
+            Page candidatePage = new CandidatePage(queqe.Dequeue());
+            candidatePage
+                .Dynamics365FavIconClick()
+                .MainNavigationTabClick()
+                .RecruitmentTabClick()
+                .CandidateTabClick()
+                .ClosePage();
+        }
+
+        //[Parallelizable]
+        //[Test]
+        //public void TestMethod2()
+        //{
             
-            //homepage1 = new HomePage(queqe.Dequeue());
-            //homepage1.OpenPage();
-        }
+        //}
 
-        [Parallelizable]
-        [Test]
-        public void TestMethod2()
-        {
-            //homepage2 = new HomePage(queqe.Dequeue());
-            //homepage2.OpenPage();
-        }
-
-        [OneTimeTearDown]
-        public void CloseCRM()
-        {
-            //Thread.Sleep(5000);
-            //homepage1.ClosePage();
-            //homepage2.ClosePage();
-        }
+        //[OneTimeTearDown]
+        //public void CloseCRM()
+        //{
+            
+        //}
     }
 }

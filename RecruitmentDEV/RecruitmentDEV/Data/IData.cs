@@ -13,6 +13,6 @@ namespace RecruitmentDEV.Data
         /// </summary>
         /// <param name="datasource">API path / filepath to JSON file or other</param>
         /// <returns></returns>
-        DataModel GetData(string datasource);
+        T GetData<T>(string datasource);
     }
 }

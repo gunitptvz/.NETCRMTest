@@ -18,14 +18,12 @@ namespace RecruitmentDEV.Data
         /// </summary>
         /// <param name="datasource"></param>
         /// <returns></returns>
-        public DataModel GetData(string datasource)
+        public T GetData<T>(string datasource)
         {
-            DataModel result = new DataModel();
-
             RestClient client = new RestClient(datasource);
             RestRequest request = new RestRequest(datasource, Method.GET);
             IRestResponse response = client.Execute(request);
-            result = JsonConvert.DeserializeObject<DataModel>(response.Content);
+            T result = JsonConvert.DeserializeObject<T>(response.Content);
 
             return result;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using RecruitmentDEV.Data;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -14,6 +15,8 @@ namespace RecruitmentDEV.Pages
     /// </summary>
     class HomePage
     {
+        #region Data
+
         IWebDriver driver;
         DataModel data = new DataModel();
         MapJsonAPI mapAPI = new MapJsonAPI();
@@ -21,7 +24,9 @@ namespace RecruitmentDEV.Pages
         string inlineDialogFrame = "InlineDialog_Iframe";
 
         [FindsBy(How = How.Id, Using = "buttonClose")]
-        IWebElement closeHelloWindowButton;
+        IWebElement closeHelloWindowButton = null;
+
+        #endregion
 
         public HomePage(IWebDriver driver)
         {
@@ -34,8 +39,10 @@ namespace RecruitmentDEV.Pages
         /// </summary>
         public IWebDriver OpenPage()
         {
-            data = mapAPI.GetData(dataSource);
+            data = mapAPI.GetData<DataModel>(dataSource);
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(data.Seconds);
+            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(data.Seconds);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(data.Seconds);
             driver.Url = "http://" + data.Login + ":" + data.Password + "@" + data.Url;
             driver.SwitchTo().Frame(inlineDialogFrame);
@@ -49,6 +56,7 @@ namespace RecruitmentDEV.Pages
         /// </summary>
         public void ClosePage()
         {
+            Thread.Sleep(3000);
             driver.Quit();
         }
     }
