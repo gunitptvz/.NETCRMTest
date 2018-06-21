@@ -18,7 +18,7 @@ namespace RecruitmentDEV.Pages
         #region Data
 
         IWebDriver driver;
-        DataModel data = new DataModel();
+        ConfigDataModel data = new ConfigDataModel();
         MapJsonAPI mapAPI = new MapJsonAPI();
         string dataSource = "https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/config.json";
         string inlineDialogFrame = "InlineDialog_Iframe";
@@ -39,7 +39,7 @@ namespace RecruitmentDEV.Pages
         /// </summary>
         public IWebDriver OpenPage()
         {
-            data = mapAPI.GetData<DataModel>(dataSource);
+            data = mapAPI.GetData<ConfigDataModel>(dataSource);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(data.Seconds);
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(data.Seconds);

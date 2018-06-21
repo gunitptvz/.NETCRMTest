@@ -59,7 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataModel.cs" />
+    <Compile Include="Data\CandidateDataModel.cs" />
+    <Compile Include="Data\ConfigDataModel.cs" />
     <Compile Include="Data\IData.cs" />
     <Compile Include="Data\MapJsonAPI.cs" />
     <Compile Include="NUnitTest1.cs" />

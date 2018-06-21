@@ -18,9 +18,9 @@ namespace RecruitmentDEV.Pages
 
         IWebDriver driver;
         string contentFrame0 = "contentIFrame0";
-        DataModel data = new DataModel();
+        CandidateDataModel data = new CandidateDataModel();
         MapJsonAPI mapAPI = new MapJsonAPI();
-        string dataSource = "https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/config.json";
+        string dataSource = "https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/candidate.json";
 
         [FindsBy(How = How.Id, Using = "TabnavTabLogoTextId")]
         IWebElement dynamics365ButtonID = null;
@@ -38,7 +38,7 @@ namespace RecruitmentDEV.Pages
         IWebElement searchforrecordsID = null;
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='crmGrid_divDataArea']//tbody//tr")]
-        List<IWebElement> listOfCandidates = null;
+        IList<IWebElement> listOfCandidates = null;
 
         #endregion
 
@@ -77,6 +77,7 @@ namespace RecruitmentDEV.Pages
 
         public override Page FindRecruitmentEntity()
         {
+            data = mapAPI.GetData<CandidateDataModel>(dataSource);
             driver.SwitchTo().Frame(contentFrame0);
             searchforrecordsID.Clear();
             searchforrecordsID.SendKeys("");

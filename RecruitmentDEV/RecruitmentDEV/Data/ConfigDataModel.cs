@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace RecruitmentDEV.Data
 {
     /// <summary>
-    /// Contains data properties
+    /// Contains configuration data properties
     /// </summary>
-    public class DataModel
+    public class ConfigDataModel
     {
         public string Url { get; set; }
         public string Login { get; set; }
