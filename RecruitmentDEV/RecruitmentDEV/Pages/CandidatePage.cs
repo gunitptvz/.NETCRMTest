@@ -12,15 +12,15 @@ namespace RecruitmentDEV.Pages
     /// <summary>
     /// Specifies crm candidate page members and methods
     /// </summary>
-    public class CandidatePage : Page
+    class CandidatePage : Page
     {
         #region Data
 
         IWebDriver driver;
         string contentFrame0 = "contentIFrame0";
+        string dataSource = "https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/candidate.json";
         CandidateDataModel data = new CandidateDataModel();
         MapJsonAPI mapAPI = new MapJsonAPI();
-        string dataSource = "https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/candidate.json";
 
         [FindsBy(How = How.Id, Using = "TabnavTabLogoTextId")]
         IWebElement dynamics365ButtonID = null;
@@ -37,6 +37,9 @@ namespace RecruitmentDEV.Pages
         [FindsBy(How = How.Id, Using = "crmGrid_findCriteria")]
         IWebElement searchforrecordsID = null;
 
+        [FindsBy(How = How.XPath, Using = ".//a[@title='Sort by Created On']")]
+        IWebElement createdOnXPath = null;
+
         [FindsBy(How = How.XPath, Using = ".//*[@id='crmGrid_divDataArea']//tbody//tr")]
         IList<IWebElement> listOfCandidates = null;
 
@@ -48,7 +51,7 @@ namespace RecruitmentDEV.Pages
             PageFactory.InitElements(driver, this);
         }
 
-        public int FindedCandidatesCount { get; private set; }
+        public override object ActualResult { get; protected set; }
 
         public override Page Dynamics365FavIconClick()
         {
@@ -80,18 +83,15 @@ namespace RecruitmentDEV.Pages
             data = mapAPI.GetData<CandidateDataModel>(dataSource);
             driver.SwitchTo().Frame(contentFrame0);
             searchforrecordsID.Clear();
-            searchforrecordsID.SendKeys("");
-            searchforrecordsID.Submit();
-            FindedCandidatesCount = listOfCandidates.Count;
+            searchforrecordsID.SendKeys(data.Name);
+            searchforrecordsID.SendKeys(Keys.Enter);
+            searchforrecordsID.SendKeys(Keys.Tab);
+            IJavaScriptExecutor createdOnFilterCliker = driver as IJavaScriptExecutor;
+            createdOnFilterCliker.ExecuteScript("arguments[0].click();", createdOnXPath);
+            createdOnFilterCliker.ExecuteScript("arguments[0].click();", createdOnXPath);
+            ActualResult = listOfCandidates.Count;
             return this;
         }
 
-        public override void ClosePage()
-        {
-            base.ClosePage();
-        }
-
-        
-        
     }
 }

@@ -63,7 +63,7 @@
     <Compile Include="Data\ConfigDataModel.cs" />
     <Compile Include="Data\IData.cs" />
     <Compile Include="Data\MapJsonAPI.cs" />
-    <Compile Include="NUnitTest1.cs" />
+    <Compile Include="NUnitTest.cs" />
     <Compile Include="Pages\CandidatePage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\Page.cs" />

@@ -8,6 +8,9 @@ using OpenQA.Selenium;
 
 namespace RecruitmentDEV.Pages
 {
+    /// <summary>
+    /// Specifies crm page members and methods
+    /// </summary>
     public abstract class Page
     {
         IWebDriver driver;
@@ -18,6 +21,11 @@ namespace RecruitmentDEV.Pages
             HomePage homepage = new HomePage(driver);
             homepage.OpenPage();
         }
+
+        /// <summary>
+        /// Gets object with test actual result
+        /// </summary>
+        public virtual object ActualResult { get; protected set; }
 
         /// <summary>
         /// Click on dynamics 365 favicon
