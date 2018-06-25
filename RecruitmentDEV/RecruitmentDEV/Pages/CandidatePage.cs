@@ -18,8 +18,9 @@ namespace RecruitmentDEV.Pages
 
         IWebDriver driver;
         string contentFrame0 = "contentIFrame0";
+        string contentFrame1 = "contentIFrame1";
         string dataSource = "https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/candidate.json";
-        CandidateDataModel data = new CandidateDataModel();
+        CandidateDataModel data;
         MapJsonAPI mapAPI = new MapJsonAPI();
 
         [FindsBy(How = How.Id, Using = "TabnavTabLogoTextId")]
@@ -43,6 +44,15 @@ namespace RecruitmentDEV.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='crmGrid_divDataArea']//tbody//tr")]
         IList<IWebElement> listOfCandidates = null;
 
+        [FindsBy(How = How.XPath, Using = ".//*[@id='header_crmFormSelector']/nobr/span")]
+        IWebElement candidateFormXPATH = null;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='crmFormTabContainer']/div")]
+        IList<IWebElement> numberOfCandidateTabs = null;
+
+        [FindsBy(How = How.XPath, Using = ".//*[@id='HeaderTilesWrapperLayoutElement']//div[@class='ms-crm-ReadField-Normal ms-crm-FieldLabel-LeftAlign']")]
+        IList<IWebElement> numberOfFirstLastNameOwnerField = null;
+
         #endregion
 
         public CandidatePage(IWebDriver driver) : base(driver)
@@ -51,7 +61,13 @@ namespace RecruitmentDEV.Pages
             PageFactory.InitElements(driver, this);
         }
 
+        
+
         public override object ActualResult { get; protected set; }
+
+        public override int NumberOfEntityTabs { get { return numberOfCandidateTabs.Count; } }
+
+        public override int NumberofFirstLastNameOwnerField { get { return numberOfCandidateTabs.Count; } }
 
         public override Page Dynamics365FavIconClick()
         {
@@ -92,6 +108,19 @@ namespace RecruitmentDEV.Pages
             ActualResult = listOfCandidates.Count;
             return this;
         }
+
+        public override Page FoundEntityClick()
+        {
+            IWebElement activeCandidateNameLinkText = driver.FindElement(By.LinkText(data.Name));
+            IJavaScriptExecutor activeCandidateClicker = driver as IJavaScriptExecutor;
+            activeCandidateClicker.ExecuteScript("arguments[0].click();", activeCandidateNameLinkText);
+            driver.SwitchTo().DefaultContent();
+            driver.SwitchTo().Frame(contentFrame1);
+            ActualResult = candidateFormXPATH.Text;
+            return this;
+        }
+
+
 
     }
 }

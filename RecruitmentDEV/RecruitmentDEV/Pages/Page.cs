@@ -14,18 +14,26 @@ namespace RecruitmentDEV.Pages
     public abstract class Page
     {
         IWebDriver driver;
+        HomePage homepage;
 
         protected Page(IWebDriver driver)
         {
             this.driver = driver;
-            HomePage homepage = new HomePage(driver);
+            homepage = new HomePage(driver);
             homepage.OpenPage();
         }
 
         /// <summary>
-        /// Gets object with test actual result
+        /// Gets an object with test actual result
         /// </summary>
         public virtual object ActualResult { get; protected set; }
+
+        public virtual int NumberofFirstLastNameOwnerField { get; protected set; }
+
+        /// <summary>
+        /// Gets an object with a number of entity (candidate, job or application) tabs
+        /// </summary>
+        public abstract int NumberOfEntityTabs { get; protected set; }
 
         /// <summary>
         /// Click on dynamics 365 favicon
@@ -50,6 +58,12 @@ namespace RecruitmentDEV.Pages
         /// </summary>
         /// <returns>Current page object</returns>
         public abstract Page FindRecruitmentEntity();
+
+        /// <summary>
+        /// Click on found Entity (candidate, job or application)
+        /// </summary>
+        /// <returns>Current page object</returns>
+        public abstract Page FoundEntityClick();
 
         /// <summary>
         /// Click on Candidate navigation tab

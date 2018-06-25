@@ -18,7 +18,7 @@ namespace RecruitmentDEV.Pages
         #region Data
 
         IWebDriver driver;
-        ConfigDataModel data = new ConfigDataModel();
+        ConfigDataModel data;
         MapJsonAPI mapAPI = new MapJsonAPI();
         string dataSource = "https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/config.json";
         string inlineDialogFrame = "InlineDialog_Iframe";

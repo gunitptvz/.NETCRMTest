@@ -12,12 +12,12 @@ namespace RecruitmentDEV
 
     public class NUnitTest
     {
-        Queue<IWebDriver> queqe = new Queue<IWebDriver>();
+        Queue<IWebDriver> drivers = new Queue<IWebDriver>();
 
         [SetUp]
         public void OpenCRM()
         {
-            queqe.Enqueue(new ChromeDriver());
+            drivers.Enqueue(new ChromeDriver());
         }
 
         [TestFixture]
@@ -29,7 +29,7 @@ namespace RecruitmentDEV
             {
                 int expectedResult = 6;
 
-                Page candidatePage = new CandidatePage(queqe.Dequeue());
+                Page candidatePage = new CandidatePage(drivers.Dequeue());
 
                 candidatePage
                     .Dynamics365FavIconClick()
@@ -47,7 +47,46 @@ namespace RecruitmentDEV
             [Test]
             public void ChosenFormTest()
             {
+                string expectedResult1 = "CANDIDATE : CDV CANDIDATES";
+                int expectedResult2 = 13;
+                int expectedResult3 = 3;
+
+                Page candidatePage = new CandidatePage(drivers.Dequeue());
+
+                candidatePage
+                    .Dynamics365FavIconClick()
+                    .MainNavigationTabClick()
+                    .RecruitmentTabClick()
+                    .CandidateTabClick()
+                    .FindRecruitmentEntity()
+                    .FoundEntityClick();
+
+                Assert.AreEqual(expectedResult1, candidatePage.ActualResult, "Chosen form is different from expected");
+                Assert.AreEqual(expectedResult2, candidatePage.NumberOfEntityTabs, "Number of candidate tabs isn't equal to expected number");
+                Assert.AreEqual(expectedResult3, candidatePage.NumberofFirstLastNameOwnerField, "Number of first name, last name and owner fields isn't equal to expected number");
+
+                candidatePage.ClosePage();
+            }
+
+            [Parallelizable]
+            [Test]
+            public void CandidateFormTabsNumberTest()
+            {
+                //int expectedResult = 13;
+
+                //Page candidatePage = new CandidatePage(drivers.Dequeue());
+
+                //candidatePage
+                //    .Dynamics365FavIconClick()
+                //    .MainNavigationTabClick()
+                //    .RecruitmentTabClick()
+                //    .CandidateTabClick()
+                //    .FindRecruitmentEntity()
+                //    .FoundEntityClick();
+
                 
+
+                //candidatePage.ClosePage();
             }
 
             //[Parallelizable]
@@ -65,11 +104,10 @@ namespace RecruitmentDEV
 
         }
 
-        /*[TearDown]
-        public void CloseCRM()
-        {
-            Thread.Sleep(3000);
-            driver.Quit();
-        }*/
+        //[TearDown]
+        //public void CloseCRM()
+        //{
+        //    Thread.Sleep(3000);
+        //}
     }
 }
