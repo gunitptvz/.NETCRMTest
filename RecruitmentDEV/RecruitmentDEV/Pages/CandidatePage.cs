@@ -20,6 +20,7 @@ namespace RecruitmentDEV.Pages
         string contentFrame0 = "contentIFrame0";
         string contentFrame1 = "contentIFrame1";
         string dataSource = "https://raw.githubusercontent.com/gunitptvz/.NETCRMTest/master/JsonFiles/candidate.json";
+        List<string> firstNameLastNameOwnerFieldsValCollect = null;
         CandidateDataModel data;
         MapJsonAPI mapAPI = new MapJsonAPI();
 
@@ -53,6 +54,9 @@ namespace RecruitmentDEV.Pages
         [FindsBy(How = How.XPath, Using = ".//*[@id='HeaderTilesWrapperLayoutElement']//div[@class='ms-crm-ReadField-Normal ms-crm-FieldLabel-LeftAlign']")]
         IList<IWebElement> numberOfFirstLastNameOwnerField = null;
 
+        [FindsBy(How = How.XPath, Using = ".//*[@id='HeaderTilesWrapperLayoutElement']//div[@class='ms-crm-Field-Data-Print']")]
+        IList<IWebElement> firstNameLastNameOwnerFieldsValXPATH = null;
+
         #endregion
 
         public CandidatePage(IWebDriver driver) : base(driver)
@@ -61,13 +65,30 @@ namespace RecruitmentDEV.Pages
             PageFactory.InitElements(driver, this);
         }
 
-        
-
         public override object ActualResult { get; protected set; }
+
+        public override List<string> ExpectedResultList
+        {
+            get
+            {
+                List<string> list = new List<string>() { data.FirstName, data.LastName, data.Owner };
+                return list;
+            }
+        }
 
         public override int NumberOfEntityTabs { get { return numberOfCandidateTabs.Count; } }
 
-        public override int NumberofFirstLastNameOwnerField { get { return numberOfCandidateTabs.Count; } }
+        public override int NumberofFirstLastNameOwnerField { get { return numberOfFirstLastNameOwnerField.Count; } }
+
+        public override List<string> FirstLastNameOwnerFieldVal
+        {
+            get
+            {
+                firstNameLastNameOwnerFieldsValCollect = new List<string>();
+                foreach (IWebElement item in firstNameLastNameOwnerFieldsValXPATH) { firstNameLastNameOwnerFieldsValCollect.Add(item.Text); }
+                return firstNameLastNameOwnerFieldsValCollect;
+            }
+        }
 
         public override Page Dynamics365FavIconClick()
         {
@@ -101,7 +122,6 @@ namespace RecruitmentDEV.Pages
             searchforrecordsID.Clear();
             searchforrecordsID.SendKeys(data.Name);
             searchforrecordsID.SendKeys(Keys.Enter);
-            searchforrecordsID.SendKeys(Keys.Tab);
             IJavaScriptExecutor createdOnFilterCliker = driver as IJavaScriptExecutor;
             createdOnFilterCliker.ExecuteScript("arguments[0].click();", createdOnXPath);
             createdOnFilterCliker.ExecuteScript("arguments[0].click();", createdOnXPath);
@@ -119,8 +139,5 @@ namespace RecruitmentDEV.Pages
             ActualResult = candidateFormXPATH.Text;
             return this;
         }
-
-
-
     }
 }

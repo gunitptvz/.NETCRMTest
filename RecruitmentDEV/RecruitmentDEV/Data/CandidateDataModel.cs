@@ -12,5 +12,8 @@ namespace RecruitmentDEV.Data
     public class CandidateDataModel
     {
         public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Owner { get; set; }
     }
 }

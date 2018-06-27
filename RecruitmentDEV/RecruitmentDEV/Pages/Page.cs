@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using OpenQA.Selenium;
+using RecruitmentDEV.Data;
 
 namespace RecruitmentDEV.Pages
 {
@@ -28,12 +29,25 @@ namespace RecruitmentDEV.Pages
         /// </summary>
         public virtual object ActualResult { get; protected set; }
 
+        /// <summary>
+        /// Gets actual count of first name / last name / owner fields
+        /// </summary>
         public virtual int NumberofFirstLastNameOwnerField { get; protected set; }
 
         /// <summary>
-        /// Gets an object with a number of entity (candidate, job or application) tabs
+        /// Gets first name / last name / owner fields values
         /// </summary>
-        public abstract int NumberOfEntityTabs { get; protected set; }
+        public virtual List<string> FirstLastNameOwnerFieldVal { get; }
+
+        /// <summary>
+        /// Gets an object with number of entity (candidate, job or application) tabs
+        /// </summary>
+        public abstract int NumberOfEntityTabs { get; }
+
+        /// <summary>
+        /// Gets an expected result data list
+        /// </summary>
+        public abstract List<string> ExpectedResultList { get; }
 
         /// <summary>
         /// Click on dynamics 365 favicon

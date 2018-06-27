@@ -49,7 +49,6 @@ namespace RecruitmentDEV
             {
                 string expectedResult1 = "CANDIDATE : CDV CANDIDATES";
                 int expectedResult2 = 13;
-                int expectedResult3 = 3;
 
                 Page candidatePage = new CandidatePage(drivers.Dequeue());
 
@@ -63,30 +62,30 @@ namespace RecruitmentDEV
 
                 Assert.AreEqual(expectedResult1, candidatePage.ActualResult, "Chosen form is different from expected");
                 Assert.AreEqual(expectedResult2, candidatePage.NumberOfEntityTabs, "Number of candidate tabs isn't equal to expected number");
-                Assert.AreEqual(expectedResult3, candidatePage.NumberofFirstLastNameOwnerField, "Number of first name, last name and owner fields isn't equal to expected number");
 
                 candidatePage.ClosePage();
             }
 
             [Parallelizable]
             [Test]
-            public void CandidateFormTabsNumberTest()
+            public void FirstName_LastName_Owner_FieldsTest()
             {
-                //int expectedResult = 13;
+                int expectedResult1 = 3;
 
-                //Page candidatePage = new CandidatePage(drivers.Dequeue());
+                Page candidatePage = new CandidatePage(drivers.Dequeue());
 
-                //candidatePage
-                //    .Dynamics365FavIconClick()
-                //    .MainNavigationTabClick()
-                //    .RecruitmentTabClick()
-                //    .CandidateTabClick()
-                //    .FindRecruitmentEntity()
-                //    .FoundEntityClick();
+                candidatePage
+                    .Dynamics365FavIconClick()
+                    .MainNavigationTabClick()
+                    .RecruitmentTabClick()
+                    .CandidateTabClick()
+                    .FindRecruitmentEntity()
+                    .FoundEntityClick();
 
-                
+                Assert.AreEqual(expectedResult1, candidatePage.NumberofFirstLastNameOwnerField, "Number of first name, last name and owner fields isn't equal to expected number");
+                CollectionAssert.AreEqual(candidatePage.ExpectedResultList, candidatePage.FirstLastNameOwnerFieldVal, "Actual result list isn't equal to expected result list");
 
-                //candidatePage.ClosePage();
+                candidatePage.ClosePage();
             }
 
             //[Parallelizable]

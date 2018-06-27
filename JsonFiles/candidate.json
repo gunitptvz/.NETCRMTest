@@ -1,9 +1,8 @@
 {
         "name": "Vinay Johar",
-        /*"firstname": "Vinay",
-        "lastname": "Johar",
-        "mobilephone": "+1877572-7737",
-        "emailaddress": "vinay@rchilli.com"*/
+        "owner": "First name Last name",
+        "firstname": "Vinay",
+        "lastname": "Johar"
 
     /*// Candidate
     "candidate":[
